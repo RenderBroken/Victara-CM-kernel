@@ -9,6 +9,7 @@
 CONFIG_MSM_HOTPLUG
 
 #### CPUFREQ ####
+CONFIG_MSM_LIMITER=y
 CONFIG_CPU_VOLTAGE_TABLE=y
 
 #### Schedulers ####
