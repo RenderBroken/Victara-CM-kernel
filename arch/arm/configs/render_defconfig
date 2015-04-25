@@ -5,6 +5,8 @@
 #
 # Render Kernel for Victara!
 #
+#### CPUFREQ ####
+CONFIG_CPU_VOLTAGE_TABLE=y
 
 #### Schedulers ####
 CONFIG_IOSCHED_BFQ=y
