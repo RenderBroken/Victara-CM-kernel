@@ -5,6 +5,9 @@
 #
 # Render Kernel for Victara!
 #
+#### Hotplugs ####
+CONFIG_MSM_HOTPLUG
+
 #### CPUFREQ ####
 CONFIG_CPU_VOLTAGE_TABLE=y
 
