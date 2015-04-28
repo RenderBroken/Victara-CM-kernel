@@ -54,7 +54,7 @@ function clean_all {
 function make_kernel {
 		echo
 		make $DEFCONFIG
-		make $THREAD
+		make $THREAD CONFIG_DEBUG_SECTION_MISMATCH=y
 		cp -vr $ZIMAGE_DIR/$KERNEL $REPACK_DIR
 }
 
