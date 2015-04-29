@@ -2605,8 +2605,8 @@ struct mxt_data *gl_mxt_data;
 
 bool scr_suspended(void)
 {
-	struct mxt_data *mxt_data = gl_mxt_data;
-	return mxt_data->suspended;
+	struct mxt_data *data = gl_mxt_data;
+	return atomic_read(&data->suspended);
 }
 
 void set_internal_dt(bool input)
