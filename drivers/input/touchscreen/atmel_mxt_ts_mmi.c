@@ -3192,7 +3192,7 @@ static int mxt_initialize_t100_input_device(struct mxt_data *data)
 	set_bit(INPUT_PROP_DIRECT, input_dev->propbit);
 
 	/* For multi touch */
-	input_mt_init_slots(input_dev, data->num_touchids, 0);
+	input_mt_init_slots(input_dev, data->num_touchids);
 
 	if (mxt_t47_stylus_state(data))
 		input_set_abs_params(input_dev, ABS_MT_TOOL_TYPE,
@@ -4799,7 +4799,7 @@ static int mxt_initialize_t9_input_device(struct mxt_data *data)
 
 	/* For multi touch */
 	num_mt_slots = data->num_touchids + data->num_stylusids;
-	input_mt_init_slots(input_dev, num_mt_slots, 0);
+	input_mt_init_slots(input_dev, num_mt_slots);
 
 	input_set_abs_params(input_dev, ABS_MT_TOUCH_MAJOR,
 			     0, MXT_MAX_AREA, 0, 0);
