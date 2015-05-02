@@ -41,18 +41,18 @@
 #define S2S_DEFAULT		0
 #define WG_PWRKEY_DUR           60
 
-/* shamu */
-#define SWEEP_Y_MAX             2559
-#define SWEEP_X_MAX             1439
+/* Victara */
+#define SWEEP_Y_MAX             1920
+#define SWEEP_X_MAX             1080
 #define SWEEP_EDGE		130
 #define SWEEP_Y_LIMIT           SWEEP_Y_MAX-SWEEP_EDGE
 #define SWEEP_X_LIMIT           SWEEP_X_MAX-SWEEP_EDGE
-#define SWEEP_X_B1              532
-#define SWEEP_X_B2              960
-#define SWEEP_Y_START		1066
-#define SWEEP_X_START		720
-#define SWEEP_X_FINAL           360
-#define SWEEP_Y_NEXT            180
+#define SWEEP_X_B1              400
+#define SWEEP_X_B2              700
+#define SWEEP_Y_START		800
+#define SWEEP_X_START		540
+#define SWEEP_X_FINAL           275
+#define SWEEP_Y_NEXT            160
 #define DT2W_FEATHER		150
 #define DT2W_TIME 		50
 
