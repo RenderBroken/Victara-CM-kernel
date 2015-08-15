@@ -21,10 +21,10 @@ DEFCONFIG="render_defconfig"
 
 # Kernel Details
 VER=Render-Kernel
+VARIANT="VICTARA-CM12"
 
 # Vars
 export LOCALVERSION=~`echo $VER`
-export CROSS_COMPILE=${HOME}/android/source/toolchains/UBER-arm-eabi-4.9-cortex-a15-041915/bin/arm-eabi-
 export ARCH=arm
 export SUBARCH=arm
 export KBUILD_BUILD_USER=RenderBroken
@@ -37,10 +37,15 @@ REPACK_DIR="${HOME}/android/source/kernel/Victara-AnyKernel"
 PATCH_DIR="${HOME}/android/source/kernel/Victara-AnyKernel/patch"
 MODULES_DIR="${HOME}/android/source/kernel/Victara-AnyKernel/modules"
 ZIP_MOVE="${HOME}/android/source/zips/victara-zips"
-ZIMAGE_DIR="${HOME}/android/source/kernel/msm8974_motox2014_render_kernel/arch/arm/boot"
-VARIANT="VICTARA"
+ZIMAGE_DIR="${HOME}/android/source/kernel/msm8974_Victara_render_kernel/arch/arm/boot"
 
 # Functions
+function checkout_branches {
+		cd $REPACK_DIR
+		git checkout victara-cm
+		cd $KERNEL_DIR
+}
+
 function clean_all {
 		rm -rf $MODULES_DIR/*
 		cd $REPACK_DIR
@@ -69,11 +74,10 @@ function make_dtb {
 
 function make_zip {
 		cd $REPACK_DIR
-		zip -r9 RenderKernel-CM12_"$VARIANT"-R.zip *
-		mv RenderKernel-CM12_"$VARIANT"-R.zip $ZIP_MOVE
+		zip -r9 RenderKernel-"$VARIANT"-R.zip *
+		mv RenderKernel-"$VARIANT"-R.zip $ZIP_MOVE
 		cd $KERNEL_DIR
 }
-
 
 DATE_START=$(date +"%s")
 
@@ -81,10 +85,24 @@ echo -e "${green}"
 echo "Render Kernel Creation Script:"
 echo -e "${restore}"
 
+echo "Pick Toolchain..."
+select choice in UBER-4.9-Cortex-a15 UBER-5.1
+do
+case "$choice" in
+	"UBER-4.9-Cortex-a15")
+		export CROSS_COMPILE=${HOME}/android/source/toolchains/UBER-arm-eabi-4.9-cortex-a15-062715/bin/arm-eabi-
+		break;;
+	"UBER-5.1")
+		export CROSS_COMPILE=${HOME}/android/source/toolchains/UBER-arm-eabi-5.1-062715/bin/arm-eabi-
+		break;;
+esac
+done
+
 while read -p "Do you want to clean stuffs (y/n)? " cchoice
 do
 case "$cchoice" in
 	y|Y )
+		checkout_branches
 		clean_all
 		echo
 		echo "All Cleaned now."
@@ -107,6 +125,7 @@ while read -p "Do you want to build kernel (y/n)? " dchoice
 do
 case "$dchoice" in
 	y|Y)
+		checkout_branches
 		make_kernel
 		make_dtb
 		make_modules
