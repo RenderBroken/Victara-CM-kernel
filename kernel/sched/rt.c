@@ -843,7 +843,7 @@ out:
 	pr_err("%s", buf);
 	BUG();
 #else
-	printk_deferred("%s", buf);
+	printk_sched("%s", buf);
 #endif
 }
 

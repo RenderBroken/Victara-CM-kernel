@@ -155,15 +155,9 @@ int stm401_display_handle_quickpeek_locked(struct stm401_data *ps_stm401,
 	int ret = 0;
 	u8 aod_qp_reason;
 	u8 aod_qp_panel_state;
-<<<<<<< HEAD
-	struct stm401_quickpeek_message *qp_message;
-||||||| parent of c4df8c5... stm401: remove global i2c buffers
-	struct stm401_quickpeek_message *qp_message = NULL;
-=======
 	struct stm401_quickpeek_message *qp_message = NULL;
 	unsigned char cmdbuff[1];
 	unsigned char readbuff[STM401_MAXDATA_LENGTH];
->>>>>>> c4df8c5... stm401: remove global i2c buffers
 
 	dev_dbg(&ps_stm401->client->dev, "%s\n", __func__);
 
@@ -282,7 +276,8 @@ exit:
 
 error:
 	stm401_quickpeek_status_ack(ps_stm401, qp_message, AOD_QP_ACK_INVALID);
-	kfree(qp_message);
+	if (qp_message != NULL)
+		kfree(qp_message);
 	ret = -EIO;
 	goto exit;
 }
